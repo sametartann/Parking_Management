@@ -2,15 +2,18 @@ public class ParkingLot { // represents a parking lot
     // store the available and occupied parking spaces in LinkedList
     private LinkedList<ParkingSpace> availableSpaces;
     private LinkedList<ParkingSpace> occupiedSpaces;
-    private Tree entranceTree; //Tree
+    private final Tree entranceTree; //Tree
     private int totalSpace;
-
+    
     public ParkingLot(int totalSpaces) { //initializes the parking lot
         availableSpaces = new LinkedList<>();
         occupiedSpaces = new LinkedList<>();
         entranceTree = new Tree();
         this.totalSpace= totalSpaces;
+        initializeSpaces();
+    }
 
+    private void initializeSpaces() {
         // initialize parking spaces
         for (int i = 1; i <= totalSpace; i++) {
             ParkingSpace space = new ParkingSpace(i);
@@ -18,6 +21,7 @@ public class ParkingLot { // represents a parking lot
             entranceTree.insert(space);
         }
     }
+
 
     public void parkCar() { // park a car in the parking lot
         if (availableSpaces.isEmpty()) {
@@ -138,5 +142,21 @@ public class ParkingLot { // represents a parking lot
 	        for (ParkingSpace space : occupiedSpaces) {
 	            System.out.println("Space " + space.getSpaceNumber() + " - Revenue: $" + revenue);
 	        }*/
+    }
+
+    public LinkedList<ParkingSpace> getOccupiedSpaces() {
+        return occupiedSpaces;
+    }
+    
+    public boolean isFull() {
+        return availableSpaces.getSize() == 0;
+    }
+    
+    public LinkedList<ParkingSpace> getAvailableSpaces() {
+        return availableSpaces;
+    }
+    
+    public int getTotalSpace() {
+    	return totalSpace;
     }
 }
